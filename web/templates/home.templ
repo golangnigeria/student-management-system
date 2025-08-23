@@ -1,0 +1,35 @@
+package templates
+
+import (
+	"github.com/stackninja.pro/goth/internals/models"
+	"github.com/stackninja.pro/goth/web/templates/components"
+)
+
+templ HomePage(td *models.TemplateData) {
+	<head>
+		@components.Header()
+	</head>
+
+	<div class="flex h-screen bg-gray-900 text-gray-100">
+		<!-- Main wrapper with sidebar + content side by side -->
+		<div class="flex flex-1 gap-4 p-4">
+			
+			
+			<!-- Content (right) -->
+			<div class="flex-1 flex flex-col">
+				<header class="bg-gray-800 shadow p-4 flex justify-between items-center rounded-lg">
+					<h1 class="text-xl font-bold">Dashboard</h1>
+					<a href="/about" class="text-sm text-red-400 hover:text-red-300 transition">
+						About
+					</a>
+				</header>
+
+				<main class="flex-1 overflow-y-auto p-6 space-y-6">
+					@components.ProfileCard(td)
+					@components.ProfileDetails(td)
+				</main>
+			</div>
+
+		</div>
+	</div>
+}

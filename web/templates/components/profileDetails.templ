@@ -1,0 +1,12 @@
+package components
+
+import "github.com/stackninja.pro/goth/internals/models"
+
+templ ProfileDetails(td *models.TemplateData) {
+	<div class="flex flex-col md:flex-row gap-6">
+		@ProfileInformation(td)
+
+		<!-- Quick Actions -->
+		 @QuickActions()
+	</div>
+}

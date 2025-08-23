@@ -1,0 +1,31 @@
+package templates
+
+import (
+  "github.com/stackninja.pro/goth/web/templates/components"
+	"github.com/stackninja.pro/goth/internals/models"
+)
+
+
+// Layout component
+templ Layout(td *models.TemplateData) {
+<!doctype html>
+<html lang="en">
+    <head>
+        @components.Header()
+    </head>
+<body class="bg-gray-950 text-gray-100 min-h-screen flex flex-col">
+  
+  <!-- Navbar (dark green/orange/teal theme) -->
+  @components.Navbar(td)
+
+  <!-- Page content -->
+  <main class="container mx-auto my-6 px-4 flex-1">
+    <div class="bg-gray-900/70 rounded-xl shadow-lg p-6">
+      { children... }
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+</body>
+</html>
+}

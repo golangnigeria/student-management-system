@@ -1,0 +1,11 @@
+/* src/app.css */
+@import "tailwindcss";
+
+/* Optional: if some templates aren't detected automatically, point to them */
+@source "web/templates/**/*.html";
+
+/* Optional: theme tokens (new v4 feature) */
+@theme {
+  --font-sans: ui-sans-serif, system-ui, sans-serif;
+  --color-brand-500: oklch(0.65 0.17 262);
+}

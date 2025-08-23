@@ -1,0 +1,39 @@
+package components
+
+import (
+	"github.com/stackninja.pro/goth/internals/models"
+)
+
+templ ProfileInformation(td *models.TemplateData) {
+	 
+		<!-- Profile Info -->
+		<div class="w-full md:w-1/2">
+			<div class="bg-gray-800 shadow-lg rounded-xl overflow-hidden">
+				<!-- Header -->
+				<div class="bg-gray-700 px-4 py-3 font-semibold text-lg text-gray-100">
+					Profile Information
+				</div>
+
+				<!-- Content -->
+				<div class="p-4 space-y-2 text-gray-200">
+					<p><strong>Name:</strong> { td.Data["userSession"].(*models.User).Name }</p>
+					<p><strong>Email:</strong> { td.Data["userSession"].(*models.User).Email }</p>
+
+					<p>
+						<strong>Role:</strong>
+						{{ user := td.Data["userSession"].(*models.User) }}
+						if user.Category == 1 {
+							Admin
+						} else if user.Category == 2 {
+							Student
+						} else {
+							Instructor
+						}
+					</p>
+
+					<p><strong>DOB:</strong> { td.Data["userSession"].(*models.User).DOBFormatted }</p>
+					<p><strong>Bio:</strong> <br /> { td.Data["userSession"].(*models.User).Bio }</p>
+				</div>
+			</div>
+		</div>
+}

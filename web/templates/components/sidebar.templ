@@ -1,0 +1,39 @@
+package components
+
+templ Sidebar() {
+	<nav class="h-full flex flex-col bg-gray-800 shadow-lg rounded-r-2xl p-4">
+		<!-- Brand -->
+		<div class="flex items-center mb-8">
+			<img src="/static/img/logo.png" alt="Logo" class="w-10 h-10 rounded-full mr-3"/>
+			<h5 class="text-lg font-bold text-white">User Panel</h5>
+		</div>
+
+		<!-- Nav Links -->
+		<ul class="space-y-3">
+			<li>
+				<a href="/" class="flex items-center px-3 py-2 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition">
+					<i class="fas fa-user mr-3"></i>
+					My Profile
+				</a>
+			</li>
+			<li>
+				<a href="/settings" class="flex items-center px-3 py-2 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition">
+					<i class="fas fa-cog mr-3"></i>
+					Settings
+				</a>
+			</li>
+			<li>
+				<a href="/users" class="flex items-center px-3 py-2 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition">
+					<i class="fas fa-users mr-3"></i>
+					User Management
+				</a>
+			</li>
+			<li>
+				<a href="/logout" class="flex items-center px-3 py-2 rounded-lg text-red-500 hover:bg-red-600 hover:text-white transition">
+					<i class="fas fa-sign-out-alt mr-3"></i>
+					Logout
+				</a>
+			</li>
+		</ul>
+	</nav>
+}
