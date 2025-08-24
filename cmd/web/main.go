@@ -14,8 +14,6 @@ import (
 	"github.com/stackninja.pro/goth/src/config"
 )
 
-
-
 func main() {
 	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt)
 	defer cancel()
@@ -31,7 +29,6 @@ func main() {
 func Run(ctx context.Context) (*driver.DB, error) {
 	var app config.AppConfig
 
-
 	app.Session = sessions.NewCookieStore([]byte("usermanagementsecret"))
 
 	// Sessions
@@ -42,15 +39,12 @@ func Run(ctx context.Context) (*driver.DB, error) {
 		Secure:   true,
 	}
 
-	
-
 	// DB connection
 	log.Println("🔗 Connecting to database...")
 	conn, err := driver.ConnectToDB("postgresql://neondb_owner:npg_egURTqLtd89F@ep-divine-cherry-afa5sm0c-pooler.c-2.us-west-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require")
 	if err != nil {
 		log.Fatalf("❌ Failed to connect to database: %v", err)
 	}
-
 
 	repo := handlers.NewRepository(&app, conn)
 	handlers.NewHandlers(repo)
