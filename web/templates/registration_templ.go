@@ -45,14 +45,14 @@ func RegistrationPage(td *models.TemplateData) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"flex justify-center items-center min-h-screen bg-gradient-to-br from-green-900 via-green-800 to-orange-700  \"><div class=\"backdrop-blur-xl bg-white/10 shadow-2xl rounded-2xl p-8 w-full max-w-md border border-white/20\"><!-- Title --><h2 class=\"text-3xl font-extrabold text-center text-white mb-8 tracking-wide\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"flex justify-center items-center min-h-screen bg-gray-950 text-gray-100\"><div class=\"backdrop-blur-xl bg-gray-900/70 shadow-2xl rounded-2xl p-8 w-full max-w-md border border-gray-700\"><!-- Title --><h2 class=\"text-3xl font-extrabold text-center text-white mb-8 tracking-wide\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(td.StringMap["title"])
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/registration.templ`, Line: 15, Col: 33}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/registration.templ`, Line: 14, Col: 33}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
@@ -82,7 +82,7 @@ func RegistrationPage(td *models.TemplateData) templ.Component {
 					var templ_7745c5c3_Var5 string
 					templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(err)
 					if templ_7745c5c3_Err != nil {
-						return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/registration.templ`, Line: 24, Col: 53}
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/registration.templ`, Line: 23, Col: 53}
 					}
 					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 					if templ_7745c5c3_Err != nil {
@@ -99,40 +99,40 @@ func RegistrationPage(td *models.TemplateData) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</div><!-- Name --><div><label for=\"name\" class=\"block text-sm font-medium text-gray-200\">Full Name</label> <input type=\"text\" id=\"name\" name=\"name\" value=\"")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</div><!-- Name --><div><label for=\"name\" class=\"block text-sm font-medium text-gray-300\">Full Name</label> <input type=\"text\" id=\"name\" name=\"name\" value=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var6 string
 			templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(td.Data["user"].(*models.User).Name)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/registration.templ`, Line: 32, Col: 96}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/registration.templ`, Line: 31, Col: 96}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "\" class=\"mt-1 w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400\"></div><!-- Email --><div><label for=\"email\" class=\"block text-sm font-medium text-gray-200\">Email address</label> <input type=\"email\" id=\"email\" name=\"email\" value=\"")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "\" class=\"mt-1 w-full px-4 py-3 rounded-xl bg-gray-800 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500\"></div><!-- Email --><div><label for=\"email\" class=\"block text-sm font-medium text-gray-300\">Email address</label> <input type=\"email\" id=\"email\" name=\"email\" value=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var7 string
 			templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(td.Data["user"].(*models.User).Email)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/registration.templ`, Line: 39, Col: 100}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/registration.templ`, Line: 38, Col: 100}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "\" class=\"mt-1 w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400\"></div><!-- Password --><div><label for=\"password\" class=\"block text-sm font-medium text-gray-200\">Password</label> <input type=\"password\" id=\"password\" name=\"password\" class=\"mt-1 w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400\"></div><!-- Category --><div><label for=\"category\" class=\"block text-sm font-medium text-gray-200\">Category</label> <select id=\"category\" name=\"category\" class=\"mt-1 w-full px-4 py-3 rounded-xl bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400\"><option value=\"\">Select category</option> <option value=\"1\" selected=\"")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "\" class=\"mt-1 w-full px-4 py-3 rounded-xl bg-gray-800 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500\"></div><!-- Password --><div><label for=\"password\" class=\"block text-sm font-medium text-gray-300\">Password</label> <input type=\"password\" id=\"password\" name=\"password\" class=\"mt-1 w-full px-4 py-3 rounded-xl bg-gray-800 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500\"></div><!-- Category --><div><label for=\"category\" class=\"block text-sm font-medium text-gray-300\">Category</label> <select id=\"category\" name=\"category\" class=\"mt-1 w-full px-4 py-3 rounded-xl bg-gray-800 text-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500\"><option value=\"\">Select category</option> <option value=\"1\" selected=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var8 string
 			templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(td.Data["user"].(*models.User).Category == 1)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/registration.templ`, Line: 56, Col: 87}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/registration.templ`, Line: 55, Col: 87}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 			if templ_7745c5c3_Err != nil {
@@ -145,13 +145,13 @@ func RegistrationPage(td *models.TemplateData) templ.Component {
 			var templ_7745c5c3_Var9 string
 			templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(td.Data["user"].(*models.User).Category == 2)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/registration.templ`, Line: 57, Col: 87}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/registration.templ`, Line: 56, Col: 87}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "\">Instructor</option></select></div><!-- Submit --><div><button hx-post=\"/register\" hx-target=\"#error-messages\" hx-swap=\"innerHTML\" class=\"w-full py-3 rounded-xl bg-gradient-to-r from-green-500 to-orange-500 text-orange font-semibold shadow-lg hover:scale-105 hover:shadow-xl transform transition duration-300 ease-in-out\">Register</button></div></form><!-- Footer --><p class=\"text-center text-gray-300 mt-8 text-sm\">Already have an account? <a href=\"/login\" class=\"text-orange-400 hover:underline font-medium\">Login</a></p></div></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "\">Instructor</option></select></div><!-- Submit --><div><button hx-post=\"/register\" hx-target=\"#error-messages\" hx-swap=\"innerHTML\" class=\"w-full py-3 rounded-xl bg-gradient-to-r from-orange-500 to-green-500 text-white font-semibold shadow-lg hover:scale-105 hover:shadow-xl transform transition duration-300 ease-in-out\">Register</button></div></form><!-- Footer --><p class=\"text-center text-gray-400 mt-8 text-sm\">Already have an account? <a href=\"/login\" class=\"text-orange-400 hover:underline font-medium\">Login</a></p></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

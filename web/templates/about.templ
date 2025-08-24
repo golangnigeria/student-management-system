@@ -2,9 +2,13 @@ package templates
 
 import (
 	"github.com/stackninja.pro/goth/internals/models"
+  "github.com/stackninja.pro/goth/web/templates/components"
 )
 
 templ AboutPage(td *models.TemplateData) {
+  <head>
+		@components.Header()
+	</head>
 @Layout(td) {
   <h1>About Goth Stack</h1>
   <p>This is the about page using plain CSS.</p>
