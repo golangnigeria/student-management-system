@@ -1,0 +1,8 @@
+# Ignore things we don’t want in the Docker image
+.git
+.gitignore
+Dockerfile
+docker-compose.yml
+README.md
+*.md
+uploads/*
