@@ -1,21 +1,48 @@
 package components
 
-templ Header(){
-    <head>
-  <meta charset="utf-8"/>
-  <title>Student management</title>
-  <link rel="stylesheet" href="static/css/main.css"/>
-  <link rel="stylesheet" href="https://student-management-system-golangnigeria2312-2uaidgg4.leapcell.dev/static/css/main.css"/>
- 
-  <!-- Icons link -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
- 
+templ Header() {
+  <head>
+    <meta charset="utf-8"/>
+    <title>Student management</title>
 
-  <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+    <!-- ✅ Mobile responsiveness -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
-  /* HTMX  */
-  <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js" integrity="sha384-Akqfrbj/HpNVo8k11SXBb6TlBWmXXlYQrCSqEWmyKJe+hDm3Z/B2WVG4smwBkRVm" crossorigin="anonymous"></script>
- 
-</head> 
+    <!-- ✅ Favicon -->
+    <link rel="icon" href="/static/img/favicon.ico" type="image/x-icon"/>
 
+    <!-- ✅ SEO -->
+    <meta name="description" content="Student Management System built with Go, HTMX, and TailwindCSS"/>
+    <meta name="keywords" content="Student Management, GoLang, HTMX, Tailwind, Flowbite"/>
+    <meta name="author" content="Dimkpa Prince"/>
+
+    <!-- ✅ Main CSS -->
+    <link rel="stylesheet" href="/static/css/main.css"/>
+    <link rel="stylesheet" href="https://student-management-system-golangnigeria2312-2uaidgg4.leapcell.dev/static/css/main.css"/>
+
+    <!-- ✅ Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
+    <!-- ✅ Flowbite UI -->
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet"/>
+
+    <!-- ✅ Tailwind (optional if you’re not bundling it yourself) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- ✅ HTMX -->
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js" integrity="sha384-Akqfrbj/HpNVo8k11SXBb6TlBWmXXlYQrCSqEWmyKJe+hDm3Z/B2WVG4smwBkRVm" crossorigin="anonymous"></script>
+
+    <!-- ✅ Alpine.js (optional: good for interactivity) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- ✅ Flowbite JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
+    <!-- ✅ Extra Mobile Support -->
+    <meta name="theme-color" content="#2563eb"/> <!-- Mobile browser color -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  </head>
 }

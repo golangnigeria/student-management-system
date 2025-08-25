@@ -12,7 +12,6 @@ templ Navbar(td *models.TemplateData) {
 			</a>
 
 			<div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-				// ✅ Show login button if user not logged in
 				if td.Data["userSession"] == nil {
 					<a href="/login" class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 
 						font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-500 dark:hover:bg-blue-600 
@@ -20,11 +19,10 @@ templ Navbar(td *models.TemplateData) {
 				} else {
 					{{ user := td.Data["userSession"].(*models.User) }}
 
-					// ✅ Conditionally render avatar
 					if user.Avatar != "" {
-						<img src={user.Avatar} class="w-20 h-20 rounded-full mr-4 border-2 border-gray-700" alt="User avatar"/>
+						<img src={ user.Avatar } class="w-10 h-10 rounded-full mr-4 border-2 border-gray-700" alt="User avatar"/>
 					} else {
-						<img class="w-8 h-8 rounded-full" src="/static/img/prayers.jpg" alt="Default avatar"/>
+						<img class="w-10 h-10 rounded-full" src="/static/img/prayers.jpg" alt="Default avatar"/>
 					}
 
 					<a href="/logout"
@@ -32,11 +30,9 @@ templ Navbar(td *models.TemplateData) {
 						<i class="fas fa-sign-out-alt"></i>
 						<span>Logout</span>
 					</a>
-					<a href="/logout" class="ml-3 text-sm text-red-600 hover:underline">Logout</a>
 				}
 			</div>
 
-			<!-- Navigation links -->
 			<div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
 				<ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg 
 					bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 
