@@ -1,14 +1,6 @@
-# leapcell.yaml
 build:
   commands:
-    # 1. Generate Templ Go code
-    - templ generate
-
-    # 2. Build Tailwind CSS into /web/static/css
-    - tailwindcss -i ./src/app.css -o ./web/static/css/main.css --minify
-
-    # 3. Build Go app
-    - go build -o bin/server ./cmd/web
+    - make build
 
 run:
   command: ./bin/server

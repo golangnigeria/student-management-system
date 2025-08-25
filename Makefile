@@ -11,7 +11,8 @@ dev:
 build:
 	templ generate
 	tailwindcss -i ./src/app.css -o ./web/static/css/main.css --minify
-	go build -o bin/goth-demo ./cmd/web
+	go build -tags netgo -ldflags "-s -w" -o bin/server ./cmd/web
+
 
 # Clean artefacts
 clean:
