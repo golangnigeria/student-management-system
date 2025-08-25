@@ -3,7 +3,7 @@
 ### Stage 1: Build
 FROM golang:1.24 AS builder
 
-# Install Node + Tailwind v3
+# Install Node + Tailwind v3 + templ
 RUN apt-get update && apt-get install -y nodejs npm && \
     npm install -g tailwindcss@3.4.13 postcss autoprefixer && \
     go install github.com/a-h/templ/cmd/templ@latest
@@ -26,8 +26,6 @@ RUN tailwindcss -i ./src/app.css -o ./web/static/css/main.css --minify
 # Build Go binary
 RUN go build -tags netgo -ldflags="-s -w" -o bin/server ./cmd/web
 
-RUN mkdir -p /tmp/uploads
-
 
 ### Stage 2: Runtime
 FROM gcr.io/distroless/base-debian12
@@ -37,6 +35,12 @@ WORKDIR /app
 # Copy binary + web assets
 COPY --from=builder /app/bin/server /app/server
 COPY --from=builder /app/web /app/web
+
+# Create uploads dir inside runtime container
+RUN mkdir -p /app/uploads
+
+# Make uploads writable
+VOLUME ["/app/uploads"]
 
 EXPOSE 8000
 
