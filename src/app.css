@@ -9,3 +9,38 @@
   --font-sans: ui-sans-serif, system-ui, sans-serif;
   --color-brand-500: oklch(0.65 0.17 262);
 }
+ 
+
+/* ===== Base Styles ===== */
+body {
+  @apply font-sans text-gray-100 bg-gradient-to-br from-green-900 via-green-800 to-orange-700 antialiased;
+}
+
+/* ===== Custom Form Styles ===== */
+.form-input {
+  @apply mt-1 w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-gray-300
+         focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400;
+}
+
+.form-label {
+  @apply block text-sm font-medium text-gray-200;
+}
+
+.btn-primary {
+  @apply w-full py-3 rounded-xl bg-gradient-to-r from-green-700 to-orange-500 text-white 
+         font-semibold shadow-lg hover:scale-105 hover:shadow-xl transform 
+         transition duration-300 ease-in-out;
+}
+
+.link {
+  @apply text-orange-400 hover:underline font-medium;
+}
+
+.card {
+  @apply backdrop-blur-xl bg-white/10 shadow-2xl rounded-2xl p-8 w-full max-w-md border border-white/20;
+}
+
+/* ===== Error Messages ===== */
+.error-text {
+  @apply text-red-400 text-sm;
+}

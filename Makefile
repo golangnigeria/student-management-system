@@ -4,7 +4,7 @@
 dev:
 	@echo "Starting templ + air (hot-reload)…"
 	templ generate --watch & 
-	tailwindcss -i ./src/app.css -o ./web/static/css/main.css --watch
+	tailwindcss -i ./src/app.css -o ./web/static/css/main.css
 	go run ./cmd/web
 
 # Production build (compile templates + Tailwind, then Go binary)

@@ -1,77 +1,56 @@
 package templates
 
+
 import (
-  "github.com/stackninja.pro/goth/internals/models"
-  "github.com/stackninja.pro/goth/web/templates/components"
+	"github.com/stackninja.pro/goth/internals/models"
 )
 
- 
 templ LoginPage(td *models.TemplateData) {
-  <head>
-		@components.Header()
-	</head>
-		 
- 
-  @Layout(td) {
-    <div class="flex justify-center items-center min-h-screen bg-gradient-to-br from-green-900 via-green-800 to-orange-700">
-      <div class="backdrop-blur-xl bg-white/10 shadow-2xl rounded-2xl p-8 w-full max-w-md border border-white/20">
-        
-        <!-- Title -->
-        <h2 class="text-3xl font-extrabold text-center text-white mb-8 tracking-wide">
-          Welcome Back
-        </h2>
+   @Layout(td) {
+  <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-900 via-green-800 to-orange-700 p-4">
+    <div class="card">
+      <h2 class="text-2xl font-bold text-center mb-6 text-white">Login to Your Account</h2>
 
-        <!-- Form -->
-        <form class="space-y-5">
-          <!-- Error Messages -->
-          <div id="error-messages">
-            @templ.Fragment("error-messages") {
+      <!-- Form -->
+      <form class="space-y-5">
+        <!-- Error Messages -->
+        <div id="error-messages">
+          @templ.Fragment("error-messages") {
               for _, err := range td.Errors {
                 <p class="text-red-400 text-sm">{ err }</p>
               }
             }
           </div>
+
           <!-- Email -->
           <div>
-            <label for="email" class="block text-sm font-medium text-gray-200">Email address</label>
-            <input type="email" id="email" name="email" required
-              class="mt-1 w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400"/>
-          </div>
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" id="email" name="email"   class="form-input"/>
+        </div>
 
-          <!-- Password -->
-          <div>
-            <label for="password" class="block text-sm font-medium text-gray-200">Password</label>
-            <input type="password" id="password" name="password" required
-              class="mt-1 w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400"/>
-          </div>
+        <!-- Password -->
+        <div>
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" name="password"   class="form-input"/>
+        </div>
 
-          <!-- Remember Me + Forgot Password -->
-          <div class="flex items-center justify-between text-sm">
-            <label class="flex items-center text-gray-300">
-              <input type="checkbox" class="mr-2 rounded bg-white/20 border-white/30 text-orange-400 focus:ring-orange-400"/>
-              Remember me
-            </label>
-            <a href="/forgot-password" class="text-orange-400 hover:underline">Forgot password?</a>
-          </div>
+        <!-- Submit -->
+        <button 
+              type="submit" 
+              hx-target="#error-messages"
+              hx-swap="innerHTML"
+              hx-post="/login"
+              class="btn-primary">Login</button>
+      </form>
 
-          <!-- Submit -->
-          <div>
-            <button 
-                    hx-post="/login" 
-                    hx-target="#error-messages" 
-                    hx-swap="innerHTML"
-              class="w-full py-3 rounded-xl bg-gradient-to-r from-green-700 to-orange-500 text-white font-semibold shadow-lg hover:scale-105 hover:shadow-xl transform transition duration-300 ease-in-out">
-              Login
-            </button>
-          </div>
-        </form>
+      <!-- Divider -->
+      <div class="mt-6 text-center text-gray-400">or</div>
 
-        <!-- Footer -->
-        <p class="text-center text-gray-300 mt-8 text-sm">
-          Don’t have an account?
-          <a href="/register" class="text-orange-400 hover:underline font-medium">Register</a>
-        </p>
+      <!-- Links -->
+      <div class="mt-4 text-center">
+        <a href="/register" class="link">Create an account</a>
       </div>
     </div>
-  }
+  </div>
+}
 }

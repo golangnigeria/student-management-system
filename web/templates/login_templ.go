@@ -10,7 +10,6 @@ import templruntime "github.com/a-h/templ/runtime"
 
 import (
 	"github.com/stackninja.pro/goth/internals/models"
-	"github.com/stackninja.pro/goth/web/templates/components"
 )
 
 func LoginPage(td *models.TemplateData) templ.Component {
@@ -34,18 +33,6 @@ func LoginPage(td *models.TemplateData) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<head>")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Err = components.Header().Render(ctx, templ_7745c5c3_Buffer)
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</head>")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
 		templ_7745c5c3_Var2 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 			templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
@@ -58,7 +45,7 @@ func LoginPage(td *models.TemplateData) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<div class=\"flex justify-center items-center min-h-screen bg-gradient-to-br from-green-900 via-green-800 to-orange-700\"><div class=\"backdrop-blur-xl bg-white/10 shadow-2xl rounded-2xl p-8 w-full max-w-md border border-white/20\"><!-- Title --><h2 class=\"text-3xl font-extrabold text-center text-white mb-8 tracking-wide\">Welcome Back</h2><!-- Form --><form class=\"space-y-5\"><!-- Error Messages --><div id=\"error-messages\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"min-h-screen flex items-center justify-center bg-gradient-to-br from-green-900 via-green-800 to-orange-700 p-4\"><div class=\"card\"><h2 class=\"text-2xl font-bold text-center mb-6 text-white\">Login to Your Account</h2><!-- Form --><form class=\"space-y-5\"><!-- Error Messages --><div id=\"error-messages\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -75,20 +62,20 @@ func LoginPage(td *models.TemplateData) templ.Component {
 				}
 				ctx = templ.InitializeContext(ctx)
 				for _, err := range td.Errors {
-					templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<p class=\"text-red-400 text-sm\">")
+					templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<p class=\"text-red-400 text-sm\">")
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
 					var templ_7745c5c3_Var4 string
 					templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(err)
 					if templ_7745c5c3_Err != nil {
-						return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/login.templ`, Line: 30, Col: 53}
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/login.templ`, Line: 20, Col: 53}
 					}
 					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
-					templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</p>")
+					templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</p>")
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
@@ -99,7 +86,7 @@ func LoginPage(td *models.TemplateData) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</div><!-- Email --><div><label for=\"email\" class=\"block text-sm font-medium text-gray-200\">Email address</label> <input type=\"email\" id=\"email\" name=\"email\" required class=\"mt-1 w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400\"></div><!-- Password --><div><label for=\"password\" class=\"block text-sm font-medium text-gray-200\">Password</label> <input type=\"password\" id=\"password\" name=\"password\" required class=\"mt-1 w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400\"></div><!-- Remember Me + Forgot Password --><div class=\"flex items-center justify-between text-sm\"><label class=\"flex items-center text-gray-300\"><input type=\"checkbox\" class=\"mr-2 rounded bg-white/20 border-white/30 text-orange-400 focus:ring-orange-400\"> Remember me</label> <a href=\"/forgot-password\" class=\"text-orange-400 hover:underline\">Forgot password?</a></div><!-- Submit --><div><button hx-post=\"/login\" hx-target=\"#error-messages\" hx-swap=\"innerHTML\" class=\"w-full py-3 rounded-xl bg-gradient-to-r from-green-700 to-orange-500 text-white font-semibold shadow-lg hover:scale-105 hover:shadow-xl transform transition duration-300 ease-in-out\">Login</button></div></form><!-- Footer --><p class=\"text-center text-gray-300 mt-8 text-sm\">Don’t have an account? <a href=\"/register\" class=\"text-orange-400 hover:underline font-medium\">Register</a></p></div></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div><!-- Email --><div><label for=\"email\" class=\"form-label\">Email address</label> <input type=\"email\" id=\"email\" name=\"email\" class=\"form-input\"></div><!-- Password --><div><label for=\"password\" class=\"form-label\">Password</label> <input type=\"password\" id=\"password\" name=\"password\" class=\"form-input\"></div><!-- Submit --><button type=\"submit\" hx-target=\"#error-messages\" hx-swap=\"innerHTML\" hx-post=\"/login\" class=\"btn-primary\">Login</button></form><!-- Divider --><div class=\"mt-6 text-center text-gray-400\">or</div><!-- Links --><div class=\"mt-4 text-center\"><a href=\"/register\" class=\"link\">Create an account</a></div></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
