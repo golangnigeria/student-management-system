@@ -10,23 +10,24 @@ templ HomePage(td *models.TemplateData) {
 		@components.Header()
 	</head>
 
-	<div class="min-h-screen bg-gray-900 text-gray-100 flex flex-col">
+	<div class="min-h-screen bg-gray-950 text-gray-100 flex flex-col">
 		<!-- Main wrapper -->
-		<div class="flex flex-1 flex-col md:flex-row gap-4 p-4">
+		<div class="flex flex-1 flex-col md:flex-row gap-6 p-6">
 			
 			<!-- Content -->
 			<div class="flex-1 flex flex-col w-full">
+				
 				<!-- Top Header -->
-				<header class="bg-gray-800 shadow p-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 rounded-lg">
-					<h1 class="text-2xl font-bold">Dashboard</h1>
+				<header class="bg-gray-900/80 border border-gray-800 backdrop-blur-md shadow-lg p-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 rounded-xl">
+					<h1 class="text-2xl font-bold text-emerald-400">Dashboard</h1>
 					
 					<div class="flex flex-col sm:flex-row gap-2 sm:gap-4 w-full sm:w-auto">
 						<a href="/about" 
-						   class="text-sm text-red-400 hover:text-red-300 transition text-center sm:text-left">
+						   class="text-sm text-teal-400 hover:text-teal-300 transition text-center sm:text-left">
 							About
 						</a>
 						<a href="/logout"
-						   class="flex items-center justify-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg shadow-sm transition duration-200">
+						   class="flex items-center justify-center gap-2 px-4 py-2 bg-orange-600 hover:bg-orange-500 text-white rounded-lg shadow-md transition duration-200">
 							<i class="fas fa-sign-out-alt"></i>
 							<span>Logout</span>
 						</a>
@@ -35,8 +36,13 @@ templ HomePage(td *models.TemplateData) {
 
 				<!-- Main content -->
 				<main class="flex-1 overflow-y-auto p-6 space-y-6">
-					@components.ProfileCard(td)
-					@components.ProfileDetails(td)
+					<div class="bg-gray-900/70 rounded-xl shadow-lg p-6">
+						@components.ProfileCard(td)
+					</div>
+					
+					<div class="bg-gray-900/70 rounded-xl shadow-lg p-6">
+						@components.ProfileDetails(td)
+					</div>
 				</main>
 			</div>
 		</div>

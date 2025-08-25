@@ -35,7 +35,7 @@ func Layout(td *models.TemplateData) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><html lang=\"en\"><head>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><html lang=\"en\" class=\"dark\"><head>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -43,7 +43,7 @@ func Layout(td *models.TemplateData) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</head><body class=\"bg-gray-950 text-gray-100 min-h-screen flex flex-col\"><!-- Navbar (dark green/orange/teal theme) -->")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</head><body class=\"bg-gray-950 text-gray-100 min-h-screen flex flex-col font-sans\"><!-- ✅ Navbar (dark teal/emerald/orange theme) --><header class=\"sticky top-0 z-50 bg-gray-900/90 backdrop-blur-md shadow-md\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -51,7 +51,7 @@ func Layout(td *models.TemplateData) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<!-- Page content --><main class=\"container mx-auto my-6 px-4 flex-1\"><div class=\"bg-gray-900/70 rounded-xl shadow-lg p-6\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</header><!-- ✅ Main Content --><main class=\"flex-1 container mx-auto w-full max-w-7xl px-4 md:px-6 lg:px-8 py-6\"><div class=\"bg-gray-900/80 rounded-2xl shadow-lg p-6 md:p-8 lg:p-10\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -59,7 +59,7 @@ func Layout(td *models.TemplateData) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div></main></body></html>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div></main><!-- ✅ Footer --><footer class=\"bg-gray-900/80 border-t border-gray-800 py-6 text-center text-sm text-gray-400\"><div class=\"container mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 px-4\"><span>&copy; 2025 Student Management. All rights reserved.</span><div class=\"flex space-x-4\"><a href=\"#\" class=\"hover:text-emerald-400 transition-colors\">Privacy</a> <a href=\"#\" class=\"hover:text-orange-400 transition-colors\">Terms</a> <a href=\"#\" class=\"hover:text-teal-400 transition-colors\">Contact</a></div></div></footer><!-- ✅ Scripts (Flowbite, Alpine, HTMX already in Header) --></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

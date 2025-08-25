@@ -45,7 +45,7 @@ func LoginPage(td *models.TemplateData) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 p-6\"><div class=\"w-full max-w-md bg-slate-900/60 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-slate-800\"><!-- Title --><h2 class=\"text-3xl font-bold text-center mb-6 text-emerald-400 tracking-tight\">Login to Your Account</h2><!-- Form --><form class=\"space-y-5\"><!-- Error Messages --><div id=\"error-messages\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 p-6\"><div class=\"w-full max-w-md bg-slate-900/70 backdrop-blur-xl rounded-2xl shadow-2xl p-8 border border-slate-800\"><!-- Title --><h2 class=\"text-3xl sm:text-4xl font-bold text-center mb-8 text-emerald-400 tracking-tight\">Login to Your Account</h2><!-- Form --><form class=\"space-y-6\"><!-- Error Messages --><div id=\"error-messages\" class=\"space-y-1\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -69,7 +69,7 @@ func LoginPage(td *models.TemplateData) templ.Component {
 					var templ_7745c5c3_Var4 string
 					templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(err)
 					if templ_7745c5c3_Err != nil {
-						return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/login.templ`, Line: 23, Col: 53}
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/login.templ`, Line: 23, Col: 45}
 					}
 					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 					if templ_7745c5c3_Err != nil {
@@ -86,7 +86,7 @@ func LoginPage(td *models.TemplateData) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div><!-- Email --><div><label for=\"email\" class=\"form-label text-slate-300\">Email address</label> <input type=\"email\" id=\"email\" name=\"email\" class=\"form-input bg-slate-800 border-slate-700 text-slate-200 placeholder-slate-500\"></div><!-- Password --><div><label for=\"password\" class=\"form-label text-slate-300\">Password</label> <input type=\"password\" id=\"password\" name=\"password\" class=\"form-input bg-slate-800 border-slate-700 text-slate-200 placeholder-slate-500\"></div><!-- Submit --><button type=\"submit\" hx-target=\"#error-messages\" hx-swap=\"innerHTML\" hx-post=\"/login\" class=\"w-full py-2.5 rounded-lg font-semibold bg-emerald-600 hover:bg-emerald-500 focus:ring-2 focus:ring-emerald-400 focus:outline-none text-white transition-all duration-200\">Login</button></form><!-- Divider --><div class=\"mt-6 text-center text-slate-500\">or</div><!-- Links --><div class=\"mt-4 text-center\"><a href=\"/register\" class=\"text-sm font-medium text-emerald-400 hover:text-emerald-300 transition\">Create an account</a></div></div></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div><!-- Email --><div class=\"flex flex-col gap-2\"><label for=\"email\" class=\"form-label text-slate-300 text-sm font-medium\">Email address</label> <input type=\"email\" id=\"email\" name=\"email\" placeholder=\"you@example.com\" class=\"form-input bg-slate-800 border-slate-700 text-slate-200 placeholder-slate-500 rounded-lg focus:ring-2 focus:ring-emerald-500\"></div><!-- Password --><div class=\"flex flex-col gap-2\"><label for=\"password\" class=\"form-label text-slate-300 text-sm font-medium\">Password</label> <input type=\"password\" id=\"password\" name=\"password\" placeholder=\"••••••••\" class=\"form-input bg-slate-800 border-slate-700 text-slate-200 placeholder-slate-500 rounded-lg focus:ring-2 focus:ring-emerald-500\"></div><!-- Submit --><button type=\"submit\" hx-target=\"#error-messages\" hx-swap=\"innerHTML\" hx-post=\"/login\" class=\"w-full py-3 rounded-lg font-semibold bg-emerald-600 hover:bg-emerald-500 focus:ring-2 focus:ring-emerald-400 focus:outline-none text-white shadow-md transition-all duration-200\">Login</button></form><!-- Divider --><div class=\"mt-6 text-center text-slate-500 text-sm\">or</div><!-- Links --><div class=\"mt-4 flex flex-col sm:flex-row sm:justify-between text-center gap-3 text-sm\"><a href=\"/register\" class=\"font-medium text-emerald-400 hover:text-emerald-300 transition\">Create an account</a> <a href=\"/forgot-password\" class=\"font-medium text-slate-400 hover:text-slate-300 transition\">Forgot password?</a></div></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
