@@ -394,19 +394,20 @@ func (m *Repository) UploadAvatar(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// error messages
 	var errorMessages []string
 
-	// parse the multpart form, 10MB max upload
-	err = r.ParseMultipartForm(10 << 20) // 10MB
+	// parse multipart form (10MB max)
+	err = r.ParseMultipartForm(10 << 20)
 	if err != nil {
 		log.Println("❌ Failed to parse multipart form:", err)
 		errorMessages = append(errorMessages, "Failed to parse form data")
-		templates.ChangeAvatar(&models.TemplateData{Data: map[string]interface{}{"title": "Change Avatar", "userSession": user}, Errors: errorMessages}).Render(r.Context(), w)
+		templates.ChangeAvatar(&models.TemplateData{
+			Data:   map[string]interface{}{"title": "Change Avatar", "userSession": user},
+			Errors: errorMessages,
+		}).Render(r.Context(), w)
 		return
 	}
 
-	// retrieve the avatar from the form
 	file, handler, err := r.FormFile("avatar")
 	if err != nil {
 		if err == http.ErrMissingFile {
@@ -415,30 +416,50 @@ func (m *Repository) UploadAvatar(w http.ResponseWriter, r *http.Request) {
 			errorMessages = append(errorMessages, "Failed to retrieve file")
 		}
 		if len(errorMessages) > 0 {
-			templates.ChangeAvatar(&models.TemplateData{Data: map[string]interface{}{"title": "Change Avatar", "userSession": user}, Errors: errorMessages}).Render(r.Context(), w)
+			templates.ChangeAvatar(&models.TemplateData{
+				Data:   map[string]interface{}{"title": "Change Avatar", "userSession": user},
+				Errors: errorMessages,
+			}).Render(r.Context(), w)
 			return
 		}
 	}
 	defer file.Close()
 
-	// Generate a unique filename to avoid conflicting
+	// Generate a unique filename
 	uuid, err := uuid.NewRandom()
 	if err != nil {
 		log.Println("❌ Failed to generate UUID:", err)
 		errorMessages = append(errorMessages, "Failed to generate unique filename")
-		templates.ChangeAvatar(&models.TemplateData{Data: map[string]interface{}{"title": "Change Avatar", "userSession": user}, Errors: errorMessages}).Render(r.Context(), w)
+		templates.ChangeAvatar(&models.TemplateData{
+			Data:   map[string]interface{}{"title": "Change Avatar", "userSession": user},
+			Errors: errorMessages,
+		}).Render(r.Context(), w)
+		return
+	}
+	filename := uuid.String() + filepath.Ext(handler.Filename)
+
+	// ✅ Define upload directory
+	uploadDir := filepath.Join(".", "uploads") // ./uploads
+	if err := os.MkdirAll(uploadDir, os.ModePerm); err != nil {
+		log.Println("❌ Failed to create uploads dir:", err)
+		errorMessages = append(errorMessages, "Failed to prepare upload folder")
+		templates.ChangeAvatar(&models.TemplateData{
+			Data:   map[string]interface{}{"title": "Change Avatar", "userSession": user},
+			Errors: errorMessages,
+		}).Render(r.Context(), w)
 		return
 	}
 
-	// Create a unique filename
-	filename :=  uuid.String() + filepath.Ext(handler.Filename)
-
-	// Save the uploaded file
-	dst, err := os.Create(filepath.Join("/uploads", filename))
+	// ✅ Save uploaded file inside ./uploads
+	dstPath := filepath.Join(uploadDir, filename)
+	dst, err := os.Create(dstPath)
 	if err != nil {
 		log.Println("❌ Failed to create file:", err)
 		errorMessages = append(errorMessages, "Failed to save uploaded file")
-		templates.ChangeAvatar(&models.TemplateData{Data: map[string]interface{}{"title": "Change Avatar", "userSession": user}, Errors: errorMessages}).Render(r.Context(), w)
+		templates.ChangeAvatar(&models.TemplateData{
+			Data:   map[string]interface{}{"title": "Change Avatar", "userSession": user},
+			Errors: errorMessages,
+		}).Render(r.Context(), w)
 		return
 	}
 	defer dst.Close()
@@ -446,7 +467,10 @@ func (m *Repository) UploadAvatar(w http.ResponseWriter, r *http.Request) {
 	if _, err := io.Copy(dst, file); err != nil {
 		log.Println("❌ Failed to save uploaded file:", err)
 		errorMessages = append(errorMessages, "Failed to save uploaded file")
-		templates.ChangeAvatar(&models.TemplateData{Data: map[string]interface{}{"title": "Change Avatar", "userSession": user}, Errors: errorMessages}).Render(r.Context(), w)
+		templates.ChangeAvatar(&models.TemplateData{
+			Data:   map[string]interface{}{"title": "Change Avatar", "userSession": user},
+			Errors: errorMessages,
+		}).Render(r.Context(), w)
 		return
 	}
 
@@ -454,23 +478,20 @@ func (m *Repository) UploadAvatar(w http.ResponseWriter, r *http.Request) {
 	if err := m.DB.UpdateUserAvatar(user.ID, filename); err != nil {
 		log.Println("❌ Failed to update user avatar in DB:", err)
 		errorMessages = append(errorMessages, "Failed to update user avatar")
-		templates.ChangeAvatar(&models.TemplateData{Data: map[string]interface{}{"title": "Change Avatar", "userSession": user}, Errors: errorMessages}).Render(r.Context(), w)
+		templates.ChangeAvatar(&models.TemplateData{
+			Data:   map[string]interface{}{"title": "Change Avatar", "userSession": user},
+			Errors: errorMessages,
+		}).Render(r.Context(), w)
 		return
 	}
 
-
-	// delete the old avatar file
-	if user.Avatar != ""{
-		oldAvatarPath := filepath.Join("uploads", user.Avatar)
-
-		//check if the old is not the same as the new one
-		if oldAvatarPath != filename {
-			if err := os.Remove(oldAvatarPath); err != nil {
-				log.Printf("⚠️ Failed to delete old avatar: %s\n", err)
-			}
+	// Delete old avatar file if different
+	if user.Avatar != "" && user.Avatar != filename {
+		oldAvatarPath := filepath.Join(uploadDir, user.Avatar)
+		if err := os.Remove(oldAvatarPath); err != nil {
+			log.Printf("⚠️ Failed to delete old avatar: %s\n", err)
 		}
 	}
-	 
 
 	// ✅ Success: redirect to profile page
 	w.Header().Set("HX-Location", "/")
