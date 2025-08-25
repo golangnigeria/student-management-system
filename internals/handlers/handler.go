@@ -1,17 +1,18 @@
 package handlers
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
-	"io"
 	"log"
 	"net/http"
-	"os"
 	"path/filepath"
 	"strconv"
 	"time"
 
 	"github.com/a-h/templ"
+	"github.com/cloudinary/cloudinary-go/v2"
+	"github.com/cloudinary/cloudinary-go/v2/api/uploader"
 	"github.com/google/uuid"
 	"github.com/stackninja.pro/goth/internals/driver"
 	"github.com/stackninja.pro/goth/internals/models"
@@ -396,7 +397,7 @@ func (m *Repository) UploadAvatar(w http.ResponseWriter, r *http.Request) {
 
 	var errorMessages []string
 
-	// parse multipart form (10MB max)
+	// Parse multipart form (10MB max)
 	err = r.ParseMultipartForm(10 << 20)
 	if err != nil {
 		log.Println("❌ Failed to parse multipart form:", err)
@@ -410,39 +411,28 @@ func (m *Repository) UploadAvatar(w http.ResponseWriter, r *http.Request) {
 
 	file, handler, err := r.FormFile("avatar")
 	if err != nil {
-		if err == http.ErrMissingFile {
-			errorMessages = append(errorMessages, "No file uploaded")
-		} else {
-			errorMessages = append(errorMessages, "Failed to retrieve file")
-		}
-		if len(errorMessages) > 0 {
-			templates.ChangeAvatar(&models.TemplateData{
-				Data:   map[string]interface{}{"title": "Change Avatar", "userSession": user},
-				Errors: errorMessages,
-			}).Render(r.Context(), w)
-			return
-		}
+		errorMessages = append(errorMessages, "No file uploaded")
+		templates.ChangeAvatar(&models.TemplateData{
+			Data:   map[string]interface{}{"title": "Change Avatar", "userSession": user},
+			Errors: errorMessages,
+		}).Render(r.Context(), w)
+		return
 	}
 	defer file.Close()
 
-	// Generate a unique filename
-	uuid, err := uuid.NewRandom()
+	// ✅ Generate unique public ID
+	uuid, _ := uuid.NewRandom()
+	publicID := "avatars/" + uuid.String() + filepath.Ext(handler.Filename)
+
+	// ✅ Init Cloudinary
+	cld, err := cloudinary.NewFromParams(
+		"dvmoamnui",
+		"225745419446694",
+		"40bN_Rd4TBJKQEzj4d-AoXb2AMs",
+	)
 	if err != nil {
-		log.Println("❌ Failed to generate UUID:", err)
-		errorMessages = append(errorMessages, "Failed to generate unique filename")
-		templates.ChangeAvatar(&models.TemplateData{
-			Data:   map[string]interface{}{"title": "Change Avatar", "userSession": user},
-			Errors: errorMessages,
-		}).Render(r.Context(), w)
-		return
-	}
-	filename := uuid.String() + filepath.Ext(handler.Filename)
-
-	// ✅ Define upload directory
-	uploadDir := filepath.Join(".", "uploads") // ./uploads
-	if err := os.MkdirAll(uploadDir, os.ModePerm); err != nil {
-		log.Println("❌ Failed to create uploads dir:", err)
-		errorMessages = append(errorMessages, "Failed to prepare upload folder")
+		log.Println("❌ Cloudinary init failed:", err)
+		errorMessages = append(errorMessages, "Cloud upload setup failed")
 		templates.ChangeAvatar(&models.TemplateData{
 			Data:   map[string]interface{}{"title": "Change Avatar", "userSession": user},
 			Errors: errorMessages,
@@ -450,23 +440,14 @@ func (m *Repository) UploadAvatar(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// ✅ Save uploaded file inside ./uploads
-	dstPath := filepath.Join(uploadDir, filename)
-	dst, err := os.Create(dstPath)
+	// ✅ Upload directly
+	uploadResult, err := cld.Upload.Upload(context.Background(), file, uploader.UploadParams{
+		PublicID: publicID,
+		Folder:   "avatars",
+	})
 	if err != nil {
-		log.Println("❌ Failed to create file:", err)
-		errorMessages = append(errorMessages, "Failed to save uploaded file")
-		templates.ChangeAvatar(&models.TemplateData{
-			Data:   map[string]interface{}{"title": "Change Avatar", "userSession": user},
-			Errors: errorMessages,
-		}).Render(r.Context(), w)
-		return
-	}
-	defer dst.Close()
-
-	if _, err := io.Copy(dst, file); err != nil {
-		log.Println("❌ Failed to save uploaded file:", err)
-		errorMessages = append(errorMessages, "Failed to save uploaded file")
+		log.Println("❌ Cloudinary upload failed:", err)
+		errorMessages = append(errorMessages, "Failed to upload image")
 		templates.ChangeAvatar(&models.TemplateData{
 			Data:   map[string]interface{}{"title": "Change Avatar", "userSession": user},
 			Errors: errorMessages,
@@ -474,10 +455,10 @@ func (m *Repository) UploadAvatar(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Update user avatar in DB
-	if err := m.DB.UpdateUserAvatar(user.ID, filename); err != nil {
+	// ✅ Save Cloudinary URL in DB
+	if err := m.DB.UpdateUserAvatar(user.ID, uploadResult.SecureURL); err != nil {
 		log.Println("❌ Failed to update user avatar in DB:", err)
-		errorMessages = append(errorMessages, "Failed to update user avatar")
+		errorMessages = append(errorMessages, "Failed to update avatar")
 		templates.ChangeAvatar(&models.TemplateData{
 			Data:   map[string]interface{}{"title": "Change Avatar", "userSession": user},
 			Errors: errorMessages,
@@ -485,19 +466,17 @@ func (m *Repository) UploadAvatar(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Delete old avatar file if different
-	if user.Avatar != "" && user.Avatar != filename {
-		oldAvatarPath := filepath.Join(uploadDir, user.Avatar)
-		if err := os.Remove(oldAvatarPath); err != nil {
-			log.Printf("⚠️ Failed to delete old avatar: %s\n", err)
-		}
-	}
+	// ✅ Optional: delete old Cloudinary avatar
+	 if user.Avatar != "" {
+	     _, _ = cld.Upload.Destroy(context.Background(), uploader.DestroyParams{
+	         PublicID: user.Avatar,
+	     })
+	 }
 
 	// ✅ Success: redirect to profile page
 	w.Header().Set("HX-Location", "/")
 	w.WriteHeader(http.StatusNoContent)
 }
-
 
 func (m *Repository) CheckUserAuthentication(w http.ResponseWriter, r *http.Request) (*models.User, string, error) {
 	session, err := m.App.Session.Get(r, "logged-in-user")

@@ -42,9 +42,9 @@ func ProfileCard(td *models.TemplateData) templ.Component {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var2 string
-			templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs("/uploads/" + user.Avatar)
+			templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(user.Avatar)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/components/profileCard.templ`, Line: 12, Col: 36}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/components/profileCard.templ`, Line: 12, Col: 22}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 			if templ_7745c5c3_Err != nil {

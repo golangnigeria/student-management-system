@@ -9,7 +9,7 @@ templ ProfileCard(td *models.TemplateData) {
 		<div class="flex items-center p-6">
 			<!-- Avatar -->
 			if user.Avatar != "" {
-	<img src={"/uploads/" + user.Avatar} class="w-20 h-20 rounded-full mr-4 border-2 border-gray-700" alt="User avatar"/>
+	<img src={user.Avatar} class="w-20 h-20 rounded-full mr-4 border-2 border-gray-700" alt="User avatar"/>
 } else {
 	<img src="/static/img/prayers.jpg" class="w-20 h-20 rounded-full mr-4 border-2 border-gray-700" alt="Default avatar"/>
 }
