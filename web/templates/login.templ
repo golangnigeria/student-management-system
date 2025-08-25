@@ -10,9 +10,8 @@ templ LoginPage(td *models.TemplateData) {
   <head>
 		@components.Header()
 	</head>
-		 
-	</head>
-  @Layout(td) {
+	
+  <body>
     <div class="flex justify-center items-center min-h-screen bg-gradient-to-br from-green-900 via-green-800 to-orange-700">
       <div class="backdrop-blur-xl bg-white/10 shadow-2xl rounded-2xl p-8 w-full max-w-md border border-white/20">
         
@@ -73,5 +72,7 @@ templ LoginPage(td *models.TemplateData) {
         </p>
       </div>
     </div>
+
+    </body>
   }
-}
+
