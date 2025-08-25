@@ -1,34 +1,41 @@
-# -------------------------
-# Build Stage
-# -------------------------
-FROM golang:1.22-alpine AS builder
+# syntax=docker/dockerfile:1
 
-# Install required tools
-RUN apk add --no-cache bash npm git
+### Stage 1: Build
+FROM golang:1.24 AS builder
+
+# Install Node + Tailwind v3
+RUN apt-get update && apt-get install -y nodejs npm && \
+    npm install -g tailwindcss@3.4.13 postcss autoprefixer && \
+    go install github.com/a-h/templ/cmd/templ@latest
 
 WORKDIR /app
+
+# Copy go mod files first (for caching)
+COPY go.mod go.sum ./
+RUN go mod download
+
+# Copy the rest of the source
 COPY . .
 
-# Install templ + tailwind
-RUN go install github.com/a-h/templ/cmd/templ@latest && \
-    npm install -g tailwindcss
+# Generate templates
+RUN templ generate
 
-# Generate templates, build Tailwind, then compile Go binary
-RUN templ generate && \
-    tailwindcss -i ./src/app.css -o ./web/static/css/main.css --minify && \
-    go build -o bin/goth-demo ./cmd/web
+# Build Tailwind CSS (minified, v3)
+RUN tailwindcss -i ./src/app.css -o ./web/static/css/main.css --minify
 
-# -------------------------
-# Runtime Stage
-# -------------------------
-FROM alpine:3.18
+# Build Go binary
+RUN go build -tags netgo -ldflags="-s -w" -o bin/server ./cmd/web
+
+
+### Stage 2: Runtime
+FROM gcr.io/distroless/base-debian12
 
 WORKDIR /app
 
-# Copy only what’s needed
-COPY --from=builder /app/bin/goth-demo .
-COPY --from=builder /app/web/static ./web/static
+# Copy binary + web assets
+COPY --from=builder /app/bin/server /app/server
+COPY --from=builder /app/web /app/web
 
-EXPOSE 8080
+EXPOSE 8000
 
-CMD ["./goth-demo"]
+CMD ["/app/server"]

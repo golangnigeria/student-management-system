@@ -3,16 +3,15 @@
 # Development (watch *.templ + hot-reload Go)
 dev:
 	@echo "Starting templ + air (hot-reload)…"
-	templ generate --watch & 
-	tailwindcss -i ./src/app.css -o ./web/static/css/main.css
+	templ generate --watch &
+	npx tailwindcss -i ./src/app.css -o ./web/static/css/main.css --watch &
 	go run ./cmd/web
 
-# Production build (compile templates + Tailwind, then Go binary)
+# Production build
 build:
 	templ generate
-	tailwindcss -i ./src/app.css -o ./web/static/css/main.css --minify
+	npx tailwindcss -i ./src/app.css -o ./web/static/css/main.css --minify
 	go build -tags netgo -ldflags "-s -w" -o bin/server ./cmd/web
-
 
 # Clean artefacts
 clean:
