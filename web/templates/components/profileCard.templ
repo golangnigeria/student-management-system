@@ -5,21 +5,25 @@ import "github.com/stackninja.pro/goth/internals/models"
 templ ProfileCard(td *models.TemplateData) {
 	{{ user := td.Data["userSession"].(*models.User) }}
 	
-	<div class="bg-gray-800 shadow-lg rounded-xl overflow-hidden mb-6">
-		<div class="flex items-center p-6">
+	<div class="bg-gray-800 shadow-lg rounded-2xl overflow-hidden mb-6 p-6">
+		<div class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 sm:gap-6">
+			
 			<!-- Avatar -->
 			if user.Avatar != "" {
-	<img src={user.Avatar} class="w-20 h-20 rounded-full mr-4 border-2 border-gray-700" alt="User avatar"/>
-} else {
-	<img src="/static/img/prayers.jpg" class="w-20 h-20 rounded-full mr-4 border-2 border-gray-700" alt="Default avatar"/>
-}
-
+				<img src={user.Avatar} 
+				     class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-gray-700 object-cover" 
+				     alt="User avatar"/>
+			} else {
+				<img src="/static/img/prayers.jpg" 
+				     class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-gray-700 object-cover" 
+				     alt="Default avatar"/>
+			}
 
 			<!-- User Info -->
-			<div class="ml-4 mx-4"> <!-- ensures consistent 1rem gap -->
-				<h4 class="text-xl font-semibold text-gray-100">{ user.Name }</h4>
-				<p class="text-gray-400 text-sm">{ user.Email }</p>
-				<p class="text-gray-500 text-xs mt-1">Member since { user.CreatedAt.Format("Jan 2006") }</p>
+			<div class="space-y-1">
+				<h4 class="text-lg sm:text-xl font-semibold text-gray-100 break-words">{ user.Name }</h4>
+				<p class="text-gray-400 text-sm sm:text-base break-words">{ user.Email }</p>
+				<p class="text-gray-500 text-xs sm:text-sm mt-1">Member since { user.CreatedAt.Format("Jan 2006") }</p>
 			</div>
 		</div>
 	</div>

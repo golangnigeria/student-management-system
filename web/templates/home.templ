@@ -10,26 +10,35 @@ templ HomePage(td *models.TemplateData) {
 		@components.Header()
 	</head>
 
-	<div class="flex h-screen bg-gray-900 text-gray-100">
-		<!-- Main wrapper with sidebar + content side by side -->
-		<div class="flex flex-1 gap-4 p-4">
+	<div class="min-h-screen bg-gray-900 text-gray-100 flex flex-col">
+		<!-- Main wrapper -->
+		<div class="flex flex-1 flex-col md:flex-row gap-4 p-4">
 			
-			
-			<!-- Content (right) -->
-			<div class="flex-1 flex flex-col">
-				<header class="bg-gray-800 shadow p-4 flex justify-between items-center rounded-lg">
-					<h1 class="text-xl font-bold">Dashboard</h1>
-					<a href="/about" class="text-sm text-red-400 hover:text-red-300 transition">
-						About
-					</a>
+			<!-- Content -->
+			<div class="flex-1 flex flex-col w-full">
+				<!-- Top Header -->
+				<header class="bg-gray-800 shadow p-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 rounded-lg">
+					<h1 class="text-2xl font-bold">Dashboard</h1>
+					
+					<div class="flex flex-col sm:flex-row gap-2 sm:gap-4 w-full sm:w-auto">
+						<a href="/about" 
+						   class="text-sm text-red-400 hover:text-red-300 transition text-center sm:text-left">
+							About
+						</a>
+						<a href="/logout"
+						   class="flex items-center justify-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg shadow-sm transition duration-200">
+							<i class="fas fa-sign-out-alt"></i>
+							<span>Logout</span>
+						</a>
+					</div>
 				</header>
 
+				<!-- Main content -->
 				<main class="flex-1 overflow-y-auto p-6 space-y-6">
 					@components.ProfileCard(td)
 					@components.ProfileDetails(td)
 				</main>
 			</div>
-
 		</div>
 	</div>
 }

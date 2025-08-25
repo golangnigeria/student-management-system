@@ -72,25 +72,12 @@ func Navbar(td *models.TemplateData) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, " <span class=\"text-gray-800 dark:text-white text-sm\">")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			var templ_7745c5c3_Var3 string
-			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(user.Email)
-			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/components/navbar.templ`, Line: 30, Col: 69}
-			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "</span> <a href=\"/logout\" class=\"ml-3 text-sm text-red-600 hover:underline\">Logout</a>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, " <a href=\"/logout\" class=\"flex items-center justify-center gap-2 w-full px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg shadow-sm transition duration-200\"><i class=\"fas fa-sign-out-alt\"></i> <span>Logout</span></a> <a href=\"/logout\" class=\"ml-3 text-sm text-red-600 hover:underline\">Logout</a>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "</div><!-- Navigation links --><div class=\"items-center justify-between hidden w-full md:flex md:w-auto md:order-1\" id=\"navbar-user\"><ul class=\"flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg \r\n\t\t\t\t\tbg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 \r\n\t\t\t\t\tmd:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700\"><li><a href=\"/\" class=\"block py-2 px-3 text-white bg-blue-700 rounded-sm \r\n\t\t\t\t\t\tmd:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500\" aria-current=\"page\">Home</a></li><li><a href=\"/about\" class=\"block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 \r\n\t\t\t\t\t\tmd:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white \r\n\t\t\t\t\t\tmd:dark:hover:text-blue-500\">About</a></li><li><a href=\"/services\" class=\"block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 \r\n\t\t\t\t\t\tmd:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white \r\n\t\t\t\t\t\tmd:dark:hover:text-blue-500\">Services</a></li><li><a href=\"/pricing\" class=\"block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 \r\n\t\t\t\t\t\tmd:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white \r\n\t\t\t\t\t\tmd:dark:hover:text-blue-500\">Pricing</a></li><li><a href=\"/contact\" class=\"block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 \r\n\t\t\t\t\t\tmd:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white \r\n\t\t\t\t\t\tmd:dark:hover:text-blue-500\">Contact</a></li></ul></div></div></nav>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "</div><!-- Navigation links --><div class=\"items-center justify-between hidden w-full md:flex md:w-auto md:order-1\" id=\"navbar-user\"><ul class=\"flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg \r\n\t\t\t\t\tbg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 \r\n\t\t\t\t\tmd:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700\"><li><a href=\"/\" class=\"block py-2 px-3 text-white bg-blue-700 rounded-sm \r\n\t\t\t\t\t\tmd:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500\" aria-current=\"page\">Home</a></li><li><a href=\"/about\" class=\"block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 \r\n\t\t\t\t\t\tmd:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white \r\n\t\t\t\t\t\tmd:dark:hover:text-blue-500\">About</a></li><li><a href=\"/services\" class=\"block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 \r\n\t\t\t\t\t\tmd:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white \r\n\t\t\t\t\t\tmd:dark:hover:text-blue-500\">Services</a></li><li><a href=\"/pricing\" class=\"block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 \r\n\t\t\t\t\t\tmd:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white \r\n\t\t\t\t\t\tmd:dark:hover:text-blue-500\">Pricing</a></li><li><a href=\"/contact\" class=\"block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 \r\n\t\t\t\t\t\tmd:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white \r\n\t\t\t\t\t\tmd:dark:hover:text-blue-500\">Contact</a></li></ul></div></div></nav>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
