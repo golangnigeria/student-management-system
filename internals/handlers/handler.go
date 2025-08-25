@@ -434,7 +434,7 @@ func (m *Repository) UploadAvatar(w http.ResponseWriter, r *http.Request) {
 	filename :=  uuid.String() + filepath.Ext(handler.Filename)
 
 	// Save the uploaded file
-	dst, err := os.Create(filepath.Join("uploads", filename))
+	dst, err := os.Create(filepath.Join("/tmp/uploads", filename))
 	if err != nil {
 		log.Println("❌ Failed to create file:", err)
 		errorMessages = append(errorMessages, "Failed to save uploaded file")

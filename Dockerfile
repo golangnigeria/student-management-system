@@ -26,6 +26,8 @@ RUN tailwindcss -i ./src/app.css -o ./web/static/css/main.css --minify
 # Build Go binary
 RUN go build -tags netgo -ldflags="-s -w" -o bin/server ./cmd/web
 
+RUN mkdir -p /tmp/uploads
+
 
 ### Stage 2: Runtime
 FROM gcr.io/distroless/base-debian12
