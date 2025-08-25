@@ -17,8 +17,8 @@ func Route() chi.Router {
 	r.Handle("/static/*", http.StripPrefix("/static/", http.FileServer(staticDir)))
 
 	// in your router setup
-	fs := http.FileServer(http.Dir("./uploads"))
-	r.Handle("/uploads/*", http.StripPrefix("/uploads", fs))
+	fs := http.FileServer(http.Dir("./tmp/uploads"))
+	r.Handle("/tmp/uploads/*", http.StripPrefix("/tmp/uploads", fs))
 
 	// pages
 	r.Get("/", handlers.Repo.HomePage)
